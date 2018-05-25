@@ -1,0 +1,172 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html>
+    <head>
+        <title>Reusable Form Demo</title>
+    </head>
+    <body>
+        {% with messages = get_flashed_messages(with_categories=true) %}
+            {% if messages %}
+                <ul>
+                    {% for message in messages %}
+                        <li>{{ message[1] }}</li>
+                    {% endfor %}
+                </ul>
+            {% endif %}
+        {% endwith %}
+        <form action="" method="post">
+            {{ form.csrf }}
+
+        <h2> Basic Information </h2> 
+ 	    
+	    <div class="form-group">
+		<label for="name">{{ form.name.label }}</label>
+		<input type ="text" class="form-control" id="name" name="name">
+		<br>	
+		<label for="title">{{ form.title.label }}</label>
+		<input type ="text" class="form-control" id="title" title="title">
+		<br>	
+		<label for="phone">{{ form.phone.label }}</label>
+		<input type ="text" class="form-control" id="phone" phone="phone">
+		<br>	
+		<label for="email">{{ form.email.label }}</label>
+		<input type ="text" class="form-control" id="email" email="email" >
+		<br>	
+		<label for="date_start">{{ form.date_start.label }}</label>
+		<input type ="text" class="form-control" id="date_start" date_start="date_start" placeholder="mm/dd/yyyy" >
+		<br>	
+		<label for="date_stop">{{ form.date_stop.label }}</label>
+		<input type ="text" class="form-control" id="date_stop" date_stop="date_stop" placeholder="mm/dd/yyyy" >
+		<br>
+		<label for="event_name">{{ form.event_name.label }}</label>
+		<input type ="text" class="form-control" id="event_name" event_name="event_name" placeholder="AAS meeting" >
+		<br>
+		<label for="event_start">{{ form.event_start.label }}</label>
+		<input type ="text" class="form-control" id="event_start" event_start="event_start" placeholder="mm/dd/yyyy" >
+		<br>
+		<label for="event_stop">{{ form.event_stop.label }}</label>
+		<input type ="text" class="form-control" id="event_stop" event_stop="event_stop" placeholder="mm/dd/yyyy" >
+		<br>
+		<label for="event_name">{{ form.event_name.label }}</label>
+		<input type ="text" class="form-control" id="event_name" event_name="event_name">
+		<br>
+		<label for="event_attendeetype">{{ form.event_attendeetype.label }}</label>
+		<input type ="text" class="form-control" id="event_attendeetype" event_attendeetype="event_attendeetype">
+		<br>
+		<label for="destination">{{ form.destination.label }}</label>
+		<input type ="text" class="form-control" id="destination" destination="destination">
+            <div class="input text">
+                {{ form.stsci_employee.label }} {{ form.stsci_employee }}
+            </div>
+            <div class="input text">
+                {{ form.external_organization.label }} {{ form.external_organization }}
+            </div>
+            <div class="input text">
+                {{ form.wbs1.label }} {{ form.wbs1 }}
+            </div>
+            <div class="input text">
+                {{ form.wbs2.label }} {{ form.wbs2 }}
+            </div>
+            <div class="input text">
+                {{ form.wbs3.label }} {{ form.wbs3 }}
+            </div>
+            <div class="input text">
+                {{ form.purpose_of_travel.label }} {{ form.purpose_of_travel }}
+            </div>
+	    <div class="input text">
+		{{ form.empl_org_num.label }} {{ form.empl_org_num }}
+	    </div>
+	    <div class="input text">
+		{{ form.travel_charges_org_num.label }} {{ form.travel_charges_org_num }}
+	    </div>
+
+        <h2> Travel Advance </h2> 
+
+                    <div class="input text">
+                {{ form.need_advance.label }} {{ form.need_advance }}
+            </div>
+            <div class="input text">
+                {{ form.how_much_advance.label }} {{ form.how_much_advance }}
+            </div>
+            <div class="input text">
+                {{ form.any_part_personal.label }} {{ form.any_part_personal }}
+            </div>
+            <div class="input text">
+                {{ form.personal_travel_dates.label }} {{ form.personal_travel_dates }}
+            </div>
+            <div class="input text">
+                {{ form.personal_travel_destination.label }} {{ form.personal_travel_destination }}
+            </div>
+
+       <h2>Transportation (Must be completed)</h2>
+
+            <div class="form-group">
+               <label for="departure">Departure City:</label>
+               <input type="text" class="form-control" id="departure" name="departure" placeholder="What city are you departing from?" size=50>
+               <br>
+               <label for="arrival">Arrival City:</label>
+               <input type="text" class="form-control" id="arrival" name="arrival" placeholder="What city are you arriving in?" size=50>
+               <br>
+               <label for="date_depart">Date of Departure:</label>
+               <input type="text" class="form-control" id="date_depart" name="date_depart" placeholder="mm/dd/yyyy">
+               <br>
+               <label for="date_return">Date of Return:</label>
+               <input type="text" class="form-control" id="date_return" name="date_return" placeholder="mm/dd/yyyy">
+            </div>
+            <h2>Rental Car and Hotel</h2>
+            <div>
+                {{ form.rental.label }} {{ form.rental }}
+            </div>
+            <div>
+                {{ form.hotel.label }} {{ form.hotel }}
+            </div>
+            <div class="form-group">
+               <label for="other">Other:</label>
+               <input type="text" class="form-control" id="other" name="other" placeholder="Special Requests" size=50>
+               <br>
+               <label for="comments">Comments:</label>
+               <input type="text" class="form-control" id="comments" name="comments" placeholder="" size=100>
+            <div>
+
+        <h2> Travel Calculation </h2> 
+            <div class="input text">
+                    {{form.airfare.label}}{{form.airfare}}
+            </div>
+            <div class="input text">
+                    {{form.days_in_hotel.label}}{{form.days_in_hotel}}
+            </div>
+            <div class="input text">
+                    {{form.hotel_rate.label}}{{form.hotel_rate}}
+            </div>
+
+            <div class="input text">
+                    {{form.hotel_parking.label}}{{form.hotel_parking}}
+            </div>
+            <div class="input text">
+                    {{form.meal_days.label}}{{form.meal_days}}
+            </div>
+            <div class="input text">
+                    {{form.meal_per_diem.label}}{{form.meal_per_diem}}
+            </div>
+            <div class="input text">
+                    {{form.rental_car.label}}{{form.rental_car}}
+            </div>
+            <div class="input text">
+                    {{form.other_car.label}}{{form.other_car}}
+            </div>
+            <div class="input text">
+                    {{form.other_phone.label}}{{form.other_phone}}
+            </div>
+            <div class="input text">
+                    {{form.other_other.label}}{{form.other_other}}
+            </div>
+            <div class="input text">
+                    {{form.registration.label}}{{form.registration}}
+            </div>
+ 
+ 
+            <div class="input submit">
+                <input type="submit" value="Submit" />
+            </div>
+        </form>
+    </body>
+</html>
