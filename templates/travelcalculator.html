@@ -16,12 +16,44 @@
         <form action="" method="post">
             {{ form.csrf }}
 
-            {% for x in form %} 
-               <div class="input text">
-                    {{x.label}}{{x}}
-               </div>
-            {% endfor %}
  
+            <h2> Travel Calculation </h2> 
+            <div class="input text">
+                    {{form.airfare.label}}{{form.airfare}}
+            </div>
+            <div class="input text">
+                    {{form.days_in_hotel.label}}{{form.days_in_hotel}}
+            </div>
+            <div class="input text">
+                    {{form.hotel_rate.label}}{{form.hotel_rate}}
+            </div>
+
+            <div class="input text">
+                    {{form.hotel_parking.label}}{{form.hotel_parking}}
+            </div>
+            <div class="input text">
+                    {{form.meal_days.label}}{{form.meal_days}}
+            </div>
+            <div class="input text">
+                    {{form.meal_per_diem.label}}{{form.meal_per_diem}}
+            </div>
+            <div class="input text">
+                    {{form.rental_car.label}}{{form.rental_car}}
+            </div>
+            <div class="input text">
+                    {{form.other_car.label}}{{form.other_car}}
+            </div>
+            <div class="input text">
+                    {{form.other_phone.label}}{{form.other_phone}}
+            </div>
+            <div class="input text">
+                    {{form.other_other.label}}{{form.other_other}}
+            </div>
+            <div class="input text">
+                    {{form.registration.label}}{{form.registration}}
+            </div>
+
+            {{output_str}}
  
             <div class="input submit">
                 <input type="submit" value="Submit" />

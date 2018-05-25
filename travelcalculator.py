@@ -29,6 +29,7 @@ def remove_dollar(form_str):
 
 @app.route("/calc", methods=['GET', 'POST'])
 def trip_calc():
+    output_str = ''
     calc = CalculatorForm(request.form)
 
     if request.method == 'POST':
