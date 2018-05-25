@@ -19,6 +19,53 @@
             <div class="input text">
                 {{ form.name.label }} {{ form.name }}
             </div>
+            <div class="input text">
+                {{ form.title.label }} {{ form.title }}
+            </div>
+            <div class="input text">
+                {{ form.phone.label }} {{ form.phone }}
+            </div>
+            <div class="input text">
+                {{ form.email.label }} {{ form.email }}
+            </div>
+            <div class="input text">
+                {{ form.date_start.label }} {{ form.date_start }}
+            </div>
+            <div class="input text">
+                {{ form.date_stop.label }} {{ form.date_stop }}
+            </div>
+            <div class="input text">
+                {{ form.event_name.label }} {{ form.event_name }}
+            </div>
+            <div class="input text">
+                {{ form.event_start.label }} {{ form.event_start }}
+            </div>
+            <div class="input text">
+                {{ form.event_stop.label }} {{ form.event_stop }}
+            </div>
+            <div class="input text">
+                {{ form.event_attendeetype.label }} {{ form.event_attendeetype }}
+            </div>
+            <div class="input text">
+                {{ form.stsci_employee.label }} {{ form.stsci_employee }}
+            </div>
+            <div class="input text">
+                {{ form.external_organization.label }} {{ form.external_organization }}
+            </div>
+            <div class="input text">
+                {{ form.destination.label }} {{ form.destination }}
+            </div>
+            <div class="input text">
+                {{ form.wbs.label }} {{ form.wbs }}
+            </div>
+            <div class="input text">
+                {{ form.purpose_of_travel.label }} {{ form.purpose_of_travel }}
+            </div>
+	    <select name= empl_nums method="GET" action="/">
+	        {% for empl_num in empl_nums %}
+		<option value= "{{empl_num}}" SELECTED>{{empl_num}}</option>"
+	        {% endfor %}
+	    </select>
  
             <div class="input submit">
                 <input type="submit" value="Submit" />
