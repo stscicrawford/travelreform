@@ -2,6 +2,7 @@ from flask import Flask, render_template, flash, request
 from wtforms import Form, TextField, TextAreaField
 from wtforms import validators, StringField, SubmitField, DateField
 
+
 # App config.
 DEBUG = True
 app = Flask(__name__)
