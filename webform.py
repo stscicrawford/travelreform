@@ -16,10 +16,10 @@ class ReusableForm(Form):
 def hello():
     form = ReusableForm(request.form)
  
-    print form.errors
+    print(form.errors)
     if request.method == 'POST':
         name=request.form['name']
-        print name
+        print(name)
  
         if form.validate():
             # Save the comment here.
@@ -27,7 +27,7 @@ def hello():
         else:
             flash('All the form fields are required. ')
  
-    return render_template('hello.html', form=form)
+    return render_template('webform.html', form=form)
  
 if __name__ == "__main__":
     app.run()
