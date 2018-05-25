@@ -1,0 +1,40 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html>
+    <head>
+        <title>Reusable Form Demo</title>
+    </head>
+    <h2>Travel Justification</h2>
+    <body>
+        {% with messages = get_flashed_messages(with_categories=true) %}
+            {% if messages %}
+                <ul>
+                    {% for message in messages %}
+                        <li>{{ message[1] }}</li>
+                    {% endfor %}
+                </ul>
+
+                               
+            {% endif %}
+        {% endwith %}
+        <form action="" method="post">
+            {{ form.csrf }}
+ 
+            <div class="form-group">
+                <label for="purpose">What's the essential purpose of attendance?</label>
+                <input type="text" class="form-control" id="purpose" name="purpose" placeholder="Purpose of attendance.">
+                <br>
+                <label for="contribution">What's contributing to the agency's core mission?</label>
+                <input type="text" class="form-control" id="contribution" name="contribution" placeholder="Contribution to the mission.">
+                <br>
+                <label for="involvement">What parts of the purpose trip is the employee substantitvely involved with?</label>
+                <input type="text" class="form-control" id="involvement" name="involvement" placeholder="Involvement in the trip.">
+                <br>
+                <label for="alternativeMethods">What other alternative methods of participation?</label>
+                <input type="text" class="form-control" id="alternativeMethods" name="alternativeMethods" placeholder="Other participation.">
+           
+              </div>
+              <button type="submit" class="btn btn-success">Submit</button>
+            </div>
+        </form>
+    </body>
+</html>
