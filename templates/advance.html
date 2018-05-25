@@ -1,0 +1,40 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html>
+    <head>
+        <title>Travel Advance</title>
+    </head>
+    <body>
+        {% with messages = get_flashed_messages(with_categories=true) %}
+            {% if messages %}
+                <ul>
+                    {% for message in messages %}
+                        <li>{{ message[1] }}</li>
+                    {% endfor %}
+                </ul>
+            {% endif %}
+        {% endwith %}
+        <form action="" method="post">
+            {{ form.csrf }}
+ 
+            <div class="input text">
+                {{ form.need_advance.label }} {{ form.need_advance }}
+            </div>
+            <div class="input text">
+                {{ form.how_much_advance.label }} {{ form.how_much_advance }}
+            </div>
+            <div class="input text">
+                {{ form.any_part_personal.label }} {{ form.any_part_personal }}
+            </div>
+            <div class="input text">
+                {{ form.personal_travel_dates.label }} {{ form.personal_travel_dates }}
+            </div>
+            <div class="input text">
+                {{ form.personal_travel_destination.label }} {{ form.personal_travel_destination }}
+            </div>
+ 
+            <div class="input submit">
+                <input type="submit" value="Submit" />
+            </div>
+        </form>
+    </body>
+</html>

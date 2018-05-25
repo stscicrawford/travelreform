@@ -9,6 +9,15 @@ app.config.from_object(__name__)
 app.config['SECRET_KEY'] = '7d441f27d441f27567d441f2b6176a'
 
 
+class TravelAdvance(Form):
+    need_advance = TextField('Do you need a travel advance?', validators=[validators.required()])
+    how_much_advance = TextField('How much?')
+    any_part_personal = TextField('Is any part of this trip personal?', validators=[validators.required()])
+    personal_travel_dates = DateField('If so, specify dates:')
+    personal_travel_destination = TextField('If so, specify destination:')
+
+    
+
 class BasicInfoForm(Form):
     name = TextField('Name of Traveler:', validators=[validators.required()])
     title = TextField('Traveler Title:', validators=[validators.required()])
@@ -72,6 +81,31 @@ def hello():
             flash('All the form fields are required. ')
  
     return render_template('webform.html', form=form, empl_nums=empl_nums)
+"""
+
+@app.route("/", methods=['GET', 'POST'])
+def advance():
+    form = TravelAdvance(request.form)
+
+    print(form.errors)
+
+
+    if request.method == 'POST':
+        need_advance = request.form['need_advance']
+        how_much_advance = request.form['how_much_advance']
+        any_part_personal = request.form['any_part_personal']
+        personal_travel_dates = request.form['personal_travel_dates']
+        personal_travel_destination = request.form['personal_travel_destination']
  
+        if form.validate():
+            pass
+        else:
+            flash('All the form fields are required. ')
+
+    return render_template('advance.html', form=form)
+
+"""
+
+
 if __name__ == "__main__":
     app.run()
