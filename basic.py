@@ -1,14 +1,14 @@
 from flask import Flask, render_template, flash, request
-from wtforms import Form, TextField, TextAreaField
+from wtforms import Form, TextField, TextAreaField, SelectField
 from wtforms import validators, StringField, SubmitField, DateField
-
+from wtforms import IntegerField
 
 # App config.
 DEBUG = True
 app = Flask(__name__)
 app.config.from_object(__name__)
 app.config['SECRET_KEY'] = '7d441f27d441f27567d441f2b6176a'
-
+wbs_flag = False
 
 class TravelAdvance(Form):
     need_advance = TextField('Do you need a travel advance?', validators=[validators.required()])
@@ -17,42 +17,58 @@ class TravelAdvance(Form):
     personal_travel_dates = DateField('If so, specify dates:')
     personal_travel_destination = TextField('If so, specify destination:')
 
-    
 
 class BasicInfoForm(Form):
     name = TextField('Name of Traveler:', validators=[validators.required()])
     title = TextField('Traveler Title:', validators=[validators.required()])
     phone = TextField('Phone:', validators=[validators.required()])
     email = TextField('Email:', validators=[validators.required()])
-    # data_start = DateField('Start Date', format='%m/%d/%Y')
-    date_start = TextField('Start Date of Travel:',
+    date_start = DateField('Start Date:',
+                           format='%m/%d/%Y',
                            validators=[validators.required()])
-    date_stop = TextField('End Date of Travel:',
+    date_stop = DateField('End Date of Travel:',
+                          format='%m/%d/%Y',
                           validators=[validators.required()])
     event_name = TextField('Event Name:', validators=[validators.required()])
-    event_start = TextField('Event Start:', validators=[validators.required()])
-    event_stop = TextField('Event Stop:', validators=[validators.required()])
+    event_start = DateField('Event Start:',
+                            format='%m/%d/%Y',
+                            validators=[validators.required()])
+    event_stop = DateField('Event Stop:',
+                           format='%m/%d/%Y',
+                           validators=[validators.required()])
     event_attendeetype = TextField('Attendee Type:',
                                    validators=[validators.required()])
 
-    stsci_employee = TextField('STScI Employee (Y/N):',
-                               validators=[validators.required()])
-    external_organization = TextField('External Org.:',
-                                      validators=[validators.required()])
+    stsci_employee = SelectField('STScI Employee?',
+                                 choices=[("yes", "yes"),
+                                          ("no", "no")],
+                                 validators=[validators.required()])
+    external_organization = TextField('External Org.:')
     destination = TextField('Destination:',
                             validators=[validators.required()])
-    wbs = TextField('WBS:', validators=[validators.required()])
+    wbs1 = IntegerField('WBS 1 (%):', validators=[validators.required()])
+    wbs2 = IntegerField('WBS 2 (%):', default=int(0))
+    wbs3 = IntegerField('WBS 3 (%):', default=int(0))
     purpose_of_travel = TextField('Purpose of Travel:',
                                   validators=[validators.required()])
-    empl_org_num = TextField('Employee Org #:',
+    empl_org_num = SelectField('Employee Org #:',
+                               choices=[("choice1", "choice1"),
+                                        ("choice2", "choice2"),
+                                        ("choice3", "choice3"),
+                                        ("choice4", "choice4"),
+                                        ("choice5", "choice5")],
                              validators=[validators.required()])
-
+    travel_charges_org_num = SelectField('Travel charges Org #:',
+                                       choices=[("choice1", "choice1"),
+                                                ("choice2", "choice2"),
+                                                ("choice3", "choice3"),
+                                                ("choice4", "choice4"),
+                                                ("choice5", "choice5")],
+                                       validators=[validators.required()])
 @app.route("/", methods=['GET', 'POST'])
 def hello():
     form = BasicInfoForm(request.form)
-    empl_nums = ["1.1.01.00.76.03, FACO Facilities Operat",
-                 "DO     Director's Office",
-                 "1.1.01.20.10.40, ACS"]
+
     print(form.errors)
     if request.method == 'POST':
         name = request.form['name']
@@ -68,10 +84,15 @@ def hello():
         stsci_employee = request.form['stsci_employee']
         external_organization = request.form['external_organization']
         destination = request.form['destination']
-        wbs = request.form['wbs']
+        wbs1 = request.form['wbs1']
+        wbs2 = request.form['wbs2']
+        wbs3 = request.form['wbs3']
         purpose_of_travel = request.form['purpose_of_travel']
         empl_org_num = request.form['empl_org_num']
- 
+        travel_charges_org_num = request.form['travel_charges_org_num']
+        #if (int(wbs1) + int(wbs2) + int(wbs3)) != 100:
+        #    wbs_flag = True
+
         if form.validate():
             # Save the comment here.
             flash('Hello ' + name)
@@ -79,34 +100,14 @@ def hello():
             flash('Your phone number is ' + phone)
 
         else:
-            flash('All the form fields are required. ')
- 
-    return render_template('webform.html', form=form, empl_nums=empl_nums)
-"""
+            flash('List of potential problems:')
+            flash('Required inputs not submitted')
+            flash('Dates are not in mm/dd/yyyy format')
+            if wbs_flag:
+                flash('Sum of WBS values does not equal 100%')
 
-@app.route("/", methods=['GET', 'POST'])
-def advance():
-    form = TravelAdvance(request.form)
-
-    print(form.errors)
-
-
-    if request.method == 'POST':
-        need_advance = request.form['need_advance']
-        how_much_advance = request.form['how_much_advance']
-        any_part_personal = request.form['any_part_personal']
-        personal_travel_dates = request.form['personal_travel_dates']
-        personal_travel_destination = request.form['personal_travel_destination']
- 
-        if form.validate():
-            pass
-        else:
-            flash('All the form fields are required. ')
-
-    return render_template('advance.html', form=form)
-
-"""
-
+    return render_template('basic.html', form=form)
 
 if __name__ == "__main__":
     app.run()
+
